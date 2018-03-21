@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Transactional extends Controller
+class TransactionsController extends Controller
 {
     /**
      * Create a new controller instance.
