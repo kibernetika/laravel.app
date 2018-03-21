@@ -124,9 +124,6 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        // Laravel IDE helper
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
