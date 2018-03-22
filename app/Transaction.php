@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Transaction extends Model
 {
@@ -24,7 +25,11 @@ class Transaction extends Model
 
     public function scopeOfClientsTransactions($query, $params)
     {
+        $to_date = Carbon::createFromFormat('d-m-Y H:s:i', $params['date'].' 00:00:00')->toDateTimeString();
+        $from_date = Carbon::createFromFormat('d-m-Y H:s:i', $params['date'].' 24:60:60')->toDateTimeString();
         $query->where('customerId', $params['customerId']);
+        $query->where('amount', $params['amount']);
+        $query->whereBetween('created_at', array($to_date, $from_date));
         return $query;
     }
 

@@ -24,16 +24,23 @@ Route::post('customer/{name}/{cnp}', function($name, $cnp) {
     return response()->json([ 'customerId' => $client->id]);
 });
 
-Route::post('transaction/{customerId}/{amount}', function($customerId, $amount) {
-    $transaction = Transaction::create(['customerId' => $customerId, 'amount' => $amount]);
-    return $transaction->toJson();
-})->where(['customerId' => '[0-9]+', 'amount' => '[0-9]+(\.[0-9][0-9]?)?']);
-
 Route::get('transactions', function () {
     return response(Transaction::all(),200);
 });
 
-Route::get('transaction/{customerId}', function ($customerId) {
-    return response(Transaction::OfClientsTransactions(['customerId' => $customerId])->get(), 200);
-});
+Route::post('transaction/{customerId}/{amount}', function($customerId, $amount) {
+    $transaction = Transaction::create(['customerId' => $customerId, 'amount' => $amount]);
+    return $transaction->toJson();
+})->where([
+    'customerId' => '[0-9]+',
+    'amount' => '[0-9]+(\.[0-9][0-9]?)?']);
+
+Route::get('transaction/{customerId}/{amount}/{date}/{offset}/{limit}', function ($customerId, $amount, $date, $offset, $limit) {
+    return response(Transaction::OfClientsTransactions(['customerId' => $customerId, 'amount' => $amount, 'date' => $date])->skip($offset)->take($limit)->get(), 200);
+})->where([
+    'customerId' => '[0-9]+',
+    'amount' => '[0-9]+(\.[0-9][0-9]?)?',
+    'date' => '^\s*(3[01]|[12][0-9]|0?[1-9])\-(1[012]|0?[1-9])\-((?:19|20)\d{2})\s*$',
+    'offset' => '[0-9]+',
+    'limit' => '[0-9]+']);
 
