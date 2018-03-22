@@ -28,6 +28,11 @@ Route::get('transactions', function () {
     return response(Transaction::all(),200);
 });
 
+Route::get('transaction/{customerId}', function($customerId) {
+    $transaction = Transaction::where('customerId', $customerId)->get();
+    return $transaction;
+})->where(['customerId' => '[0-9]+']);
+
 Route::post('transaction/{customerId}/{amount}', function($customerId, $amount) {
     $transaction = Transaction::create(['customerId' => $customerId, 'amount' => $amount]);
     return $transaction->toJson();
