@@ -13,8 +13,8 @@
 
 Auth::routes();
 
-Route::get('/transactions', 'TransactionController@index')->name('transactions');
-
 Route::get('/', function () {
     return redirect('/transactions');
 });
+
+Route::get('/transactions', 'TransactionController@index')->name('transactions');

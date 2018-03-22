@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Transaction;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -17,12 +18,14 @@ class TransactionController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show transactions list.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('transactions');
+        $transactions_list = Transaction::paginate(10);
+        return view('transactions', ['transactions_list' => $transactions_list]);
     }
+
 }

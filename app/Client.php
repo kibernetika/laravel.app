@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
 
-    protected $fillable = ['name', 'cnp'];
+    protected $table = 'client';
 
-    protected $dateFormat = 'U';
+    protected $fillable = ['name', 'cnp'];
 
     public function transaction()
     {

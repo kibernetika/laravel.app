@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
+    protected $table = 'transaction';
 
     protected $fillable = ['customerId', 'amount' ];
 
     protected $primaryKey = 'transactionId';
-
-    protected $dateFormat = 'U';
 
     public function client()
     {

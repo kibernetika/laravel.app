@@ -1,0 +1,7 @@
+table td, table th{
+    padding: 12px;
+    border: 1px solid black;
+}
+.title_page, .paginator{
+    text-align: center;
+}
