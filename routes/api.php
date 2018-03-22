@@ -27,7 +27,7 @@ Route::post('customer/{name}/{cnp}', function($name, $cnp) {
 Route::post('transaction/{customerId}/{amount}', function($customerId, $amount) {
     $transaction = Transaction::create(['customerId' => $customerId, 'amount' => $amount]);
     return $transaction->toJson();
-});
+})->where(['customerId' => '[0-9]+', 'amount' => '[0-9]+(\.[0-9][0-9]?)?']);
 
 Route::get('transactions', function () {
     return response(Transaction::all(),200);
