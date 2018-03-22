@@ -26,7 +26,7 @@ class Transaction extends Model
     public function scopeOfClientsTransactions($query, $params)
     {
         $to_date = Carbon::createFromFormat('d-m-Y H:s:i', $params['date'].' 00:00:00')->toDateTimeString();
-        $from_date = Carbon::createFromFormat('d-m-Y H:s:i', $params['date'].' 24:60:60')->toDateTimeString();
+        $from_date = Carbon::createFromFormat('d-m-Y H:s:i', $params['date'].' 23:59:59')->toDateTimeString();
         $query->where('customerId', $params['customerId']);
         $query->where('amount', $params['amount']);
         $query->whereBetween('created_at', array($to_date, $from_date));
