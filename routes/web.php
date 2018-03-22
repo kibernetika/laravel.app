@@ -13,12 +13,8 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/transactions', 'TransactionsController@index')->name('transactions');
 
 Route::get('/', function () {
     return redirect('/transactions');
 });
-
-Route::get('/transactions', function () {
-    return view('transactions');
-})->middleware('auth');
